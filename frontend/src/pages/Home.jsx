@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Globe from 'react-globe.gl'
 import SearchBar from '../components/SearchBar'
-import Profile from '../components/profile'
+import Profile from '../components/Profile'
 import Favorite from '../components/Favorite'
 
 const Home = () => {
