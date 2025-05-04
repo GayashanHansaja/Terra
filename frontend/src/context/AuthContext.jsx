@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const checkLoggedIn = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/users/me', {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/users/me`, {
           withCredentials: true
         });
         
@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }) => {
   // Fetch user favorites
   const fetchFavorites = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/users/favorites', {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/users/favorites`, {
         withCredentials: true
       });
       
@@ -53,7 +53,7 @@ export const AuthProvider = ({ children }) => {
   // Login function
   const login = async (username, password) => {
     try {
-      const res = await axios.post('http://localhost:5000/api/users/login', {
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/users/login`, {
         username,
         password
       }, { withCredentials: true });
@@ -74,7 +74,7 @@ export const AuthProvider = ({ children }) => {
   // Register function
   const register = async (username, email, password) => {
     try {
-      const res = await axios.post('http://localhost:5000/api/users/register', {
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/users/register`, {
         username,
         email,
         password
@@ -95,7 +95,7 @@ export const AuthProvider = ({ children }) => {
   // Logout function
   const logout = async () => {
     try {
-      await axios.post('http://localhost:5000/api/users/logout', {}, {
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/users/logout`, {}, {
         withCredentials: true
       });
       setCurrentUser(null);
@@ -110,7 +110,7 @@ export const AuthProvider = ({ children }) => {
     if (!currentUser) return { success: false, message: 'Please login to add favorites' };
 
     try {
-      const res = await axios.post('http://localhost:5000/api/users/favorites', {
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/users/favorites`, {
         countryCode: country.cca3,
         countryName: country.name.common,
         flagUrl: country.flags.svg
@@ -136,7 +136,7 @@ const removeFromFavorites = async (id) => {
     const favorite = favorites.find(fav => fav._id === id);
     if (!favorite) return { success: false, message: 'Favorite not found' };
     
-    const res = await axios.delete(`http://localhost:5000/api/users/favorites/${id}/${favorite.countryCode}`, {
+    const res = await axios.delete(`${import.meta.env.VITE_API_URL}/api/users/favorites/${id}/${favorite.countryCode}`, {
       withCredentials: true
     });
 
